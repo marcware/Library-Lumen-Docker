@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class AuthorController extends Controller
+class BookController extends Controller
 {
     use ApiResponser;
 
