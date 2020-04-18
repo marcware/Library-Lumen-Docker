@@ -35,10 +35,22 @@ class AuthorController extends Controller
 
     /**
      * Return autrhos list
-     * @return Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required|max:255',
+            'gender' => 'required|max:255|in:male,female',
+            'country' => 'required|max:255'
+        ];
+
+        $this->validate($request, $rules);
+
+        $author = Author::create($request->all());
+
+        return $this->succesResponse($author, Response::HTTP_CREATED);
 
     }
 
