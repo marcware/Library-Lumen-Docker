@@ -29,7 +29,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::All();
+        $books = Book::all();
 
         return $this->succesResponse($books);
     }
@@ -43,9 +43,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|max:255',
-            'gender' => 'required|max:255|in:male,female',
-            'country' => 'required|max:255'
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'price' => 'required|min:1',
+            'author_id' => 'required|min:1',
         ];
 
         $this->validate($request, $rules);
@@ -79,9 +80,10 @@ class BookController extends Controller
     public function update(Request $request, $book)
     {
         $rules = [
-            'name' => 'max:255',
-            'gender' => 'max:255|in:male,female',
-            'country' => 'max:255'
+            'title' => 'max:255',
+            'description' => 'max:255',
+            'price' => 'min:1',
+            'author_id' => 'min:1',
         ];
 
         $this->validate($request, $rules);

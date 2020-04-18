@@ -28,3 +28,6 @@ book-up:
 
 book-stop:
 	docker-compose -f LumenBooksApi/docker-compose.yml stop
+
+chown:
+	chown marcware:marcware -R LumenAuthorApi LumenBooksApi

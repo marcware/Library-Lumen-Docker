@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/LumenAuthorApi/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/auth" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/broadcasting" />
