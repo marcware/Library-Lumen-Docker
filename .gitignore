@@ -1,2 +1,3 @@
 /run/
 /LumenAuthorApi/vendor/
+/LumenAuthorApi/database/database.sqlite

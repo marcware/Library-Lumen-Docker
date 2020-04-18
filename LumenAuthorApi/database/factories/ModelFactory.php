@@ -11,9 +11,11 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Author::class, function (Faker\Generator $faker) {
     return [
+        'gender' => $faker->randomElement(['male', 'female']),
         'name' => $faker->name,
-        'email' => $faker->email,
+        'country' => $faker->country
     ];
 });
