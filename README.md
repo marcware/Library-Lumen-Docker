@@ -30,4 +30,8 @@ php artisan migrate:fresh --seed
 
 # CONTROLLER
 
+## Controler
 > app/Http/Controllers/AuthorController.php
+
+## Router
+> /routes/web.php
