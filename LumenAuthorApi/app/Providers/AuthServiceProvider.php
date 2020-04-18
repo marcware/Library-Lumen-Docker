@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Author;
+use App\Book;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->input('api_token')) {
-                return Author::where('api_token', $request->input('api_token'))->first();
+                return Book::where('api_token', $request->input('api_token'))->first();
             }
         });
     }

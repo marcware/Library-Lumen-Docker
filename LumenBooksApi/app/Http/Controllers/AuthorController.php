@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Author;
+use App\Book;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::All();
+        $authors = Book::All();
 
         return $this->succesResponse($authors);
     }
@@ -49,7 +49,7 @@ class AuthorController extends Controller
 
         $this->validate($request, $rules);
 
-        $author = Author::create($request->all());
+        $author = Book::create($request->all());
 
         return $this->succesResponse($author, Response::HTTP_CREATED);
 
@@ -57,12 +57,12 @@ class AuthorController extends Controller
 
     /**
      * Return an author
-     * @param Author $author
+     * @param Book $author
      * @return JsonResponse
      */
     public function show($author)
     {
-        $author = Author::findOrFail($author);
+        $author = Book::findOrFail($author);
 
         return $this->succesResponse($author);
 
@@ -71,7 +71,7 @@ class AuthorController extends Controller
     /**
      * Return an author
      * @param Request $request
-     * @param Author $author
+     * @param Book $author
      * @return JsonResponse
      * @throws ValidationException
      */
@@ -85,7 +85,7 @@ class AuthorController extends Controller
 
         $this->validate($request, $rules);
 
-        $author = Author::findOrFail($author);
+        $author = Book::findOrFail($author);
 
         $author->fill($request->all());
 
@@ -101,12 +101,12 @@ class AuthorController extends Controller
 
     /**
      * Return an author
-     * @param Author $author
+     * @param Book $author
      * @return JsonResponse
      */
     public function destroy($author)
     {
-        $author = Author::findOrFail($author);
+        $author = Book::findOrFail($author);
 
         $author->delete();
 
