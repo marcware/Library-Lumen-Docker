@@ -5,6 +5,7 @@
 > database/migrations/2020_04_18_101530_create_authors_table.php
 ````bash
 $ php artisan make:migration CreateAuthorsTable --create=authors
+$ php artisan make:migration CreateBooksTable  --create=books
 ````
 ````bash
 $ php artisan migrate
