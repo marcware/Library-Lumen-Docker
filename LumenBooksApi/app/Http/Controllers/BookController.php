@@ -29,15 +29,16 @@ class BookController extends Controller
      */
     public function index()
     {
-        $authors = Book::All();
+        $books = Book::All();
 
-        return $this->succesResponse($authors);
+        return $this->succesResponse($books);
     }
 
     /**
      * Return authors created
      * @param Request $request
      * @return JsonResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -49,33 +50,33 @@ class BookController extends Controller
 
         $this->validate($request, $rules);
 
-        $author = Book::create($request->all());
+        $book = Book::create($request->all());
 
-        return $this->succesResponse($author, Response::HTTP_CREATED);
+        return $this->succesResponse($book, Response::HTTP_CREATED);
 
     }
 
     /**
      * Return an author
-     * @param Book $author
+     * @param Book $book
      * @return JsonResponse
      */
-    public function show($author)
+    public function show($book)
     {
-        $author = Book::findOrFail($author);
+        $book = Book::findOrFail($book);
 
-        return $this->succesResponse($author);
+        return $this->succesResponse($book);
 
     }
 
     /**
      * Return an author
      * @param Request $request
-     * @param Book $author
+     * @param Book $book
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function update(Request $request, $author)
+    public function update(Request $request, $book)
     {
         $rules = [
             'name' => 'max:255',
@@ -85,32 +86,32 @@ class BookController extends Controller
 
         $this->validate($request, $rules);
 
-        $author = Book::findOrFail($author);
+        $book = Book::findOrFail($book);
 
-        $author->fill($request->all());
+        $book->fill($request->all());
 
-        if($author->isClean()){
+        if($book->isClean()){
             return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $author->save();
+        $book->save();
 
-        return $this->succesResponse($author);
+        return $this->succesResponse($book);
 
     }
 
     /**
      * Return an author
-     * @param Book $author
+     * @param Book $book
      * @return JsonResponse
      */
-    public function destroy($author)
+    public function destroy($book)
     {
-        $author = Book::findOrFail($author);
+        $book = Book::findOrFail($book);
 
-        $author->delete();
+        $book->delete();
 
-        return $this->succesResponse($author);
+        return $this->succesResponse($book);
 
     }
 
