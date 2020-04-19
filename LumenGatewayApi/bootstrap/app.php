@@ -1,8 +1,11 @@
 <?php
 
 
+require_once __DIR__ . '/../vendor/autoload.php';
 
-require_once __DIR__.'/../vendor/autoload.php';
+$app = new \Dusterio\LumenPassport\Lumen7Application(
+    dirname(__DIR__)
+);
 
 try {
     (new Dotenv\Dotenv(dirname(__DIR__)))->load();
@@ -33,6 +36,7 @@ $app->withEloquent();
  * Registering config files
  */
 $app->configure('services');
+$app->configure('auth');
 
 
 /*
@@ -71,9 +75,9 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -86,11 +90,11 @@ $app->singleton(
 |
 */
 
- $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 //$app->register(App\Providers\AppServiceProvider::class);
-$app->register(\Laravel\Passport\PassportServiceProvider::class);
-$app->register(\Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 
 
 /*
@@ -107,7 +111,7 @@ $app->register(\Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 return $app;

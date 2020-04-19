@@ -42,3 +42,24 @@ php artisan migrate:fresh --seed
 
 > composer clearcache
 > composer dump-autoload
+>
+
+#OATUH 2
+````bash
+    php artisan migrate
+````
+
+````bash
+    php artisan passport:install
+````
+> /storage/oauth-private.key
+> /storage/oauth-public.key
+
+Encryption keys generated successfully.
+Personal access client created successfully.
+Client ID: 1
+Client secret: m6k3wVIDyDvM2SW4sDIm0a5J51wq5MHw80IVhsc3
+Password grant client created successfully.
+Client ID: 2
+Client secret: OzpeLGZB5F7RCnZwtlEMG2x5RispkJNnkcrUyjUC
+
