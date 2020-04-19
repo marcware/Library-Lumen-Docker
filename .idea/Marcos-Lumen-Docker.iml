@@ -7,6 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/app" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/storage" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/auth" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/broadcasting" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/bus" />
@@ -30,6 +31,7 @@
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/translation" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/validation" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/view" />
+      <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/laravel" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/laravel/lumen-framework" />
       <excludeFolder url="file://$MODULE_DIR$/LumenBooksApi/app" />
       <excludeFolder url="file://$MODULE_DIR$/LumenBooksApi/storage" />

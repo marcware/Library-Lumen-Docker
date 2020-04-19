@@ -3,29 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Services\AuthorService;
 use App\Traits\ApiResponser;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Laravel\Lumen\Http\ResponseFactory;
 
 class AuthorController extends Controller
 {
     use ApiResponser;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var AuthorService
      */
-    public function __construct()
+    public $authorService;
+
+    /**
+     * @param AuthorService $authorService
+     */
+    public function __construct(AuthorService $authorService)
     {
-        //
+        $this->authorService = $authorService;
     }
 
     /**
-     * Return authors list
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
     public function index()
     {
@@ -35,9 +40,9 @@ class AuthorController extends Controller
     }
 
     /**
-     * Return authors created
      * @param Request $request
-     * @return JsonResponse
+     * @return Response|ResponseFactory
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
