@@ -49,7 +49,7 @@ gateway-stop:
 
 #permisos
 chown:
-	chown marcware:marcware -R LumenAuthorApi LumenBooksApi LumenGatewayApi
+	sudo chown marcware:marcware -R LumenAuthorApi LumenBooksApi LumenGatewayApi
 
 #ALL
 all-up:

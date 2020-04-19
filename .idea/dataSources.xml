@@ -13,5 +13,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/LumenBooksApi/database/database.sqlite</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Gataway" uuid="b948374e-dff7-477b-9382-7a76a44600dd">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/LumenGatewayApi/database/database.sqlite</jdbc-url>
+    </data-source>
   </component>
 </project>

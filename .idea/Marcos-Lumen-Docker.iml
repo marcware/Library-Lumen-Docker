@@ -4,8 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/LumenAuthorApi/app" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/LumenBooksApi/app" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/app" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/storage" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/auth" />
@@ -32,6 +31,7 @@
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/validation" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/illuminate/view" />
       <excludeFolder url="file://$MODULE_DIR$/LumenAuthorApi/vendor/laravel/lumen-framework" />
+      <excludeFolder url="file://$MODULE_DIR$/LumenBooksApi/app" />
       <excludeFolder url="file://$MODULE_DIR$/LumenBooksApi/storage" />
       <excludeFolder url="file://$MODULE_DIR$/LumenBooksApi/vendor" />
     </content>
