@@ -13,3 +13,9 @@ services:
       - APACHE_RUN_GROUP=#1000
     volumes:
       - .:/var/www/html
+    networks:
+      - udemy-app-lumen-network
+
+networks:
+  udemy-app-lumen-network:
+    driver: "bridge"

@@ -59,6 +59,12 @@ ip-author:
 	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' udemy-lumen-author
 
 #ALL
+all-down:
+	make book-down
+	make author-down
+	make gateway-down
+	docker ps
+
 all-up:
 	make book-up
 	make author-up
