@@ -22,7 +22,7 @@ class AuthorService
     public function __construct()
     {
         $this->baseUri = config('services.authors.base_uri');
-        $this->baseUri = config('services.authors.secret');
+        $this->secret = config('services.authors.secret');
     }
 
     public function obtainAuthors()

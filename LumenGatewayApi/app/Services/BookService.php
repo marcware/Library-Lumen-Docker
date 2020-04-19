@@ -21,7 +21,7 @@ class BookService
     public function __construct()
     {
         $this->baseUri = config('services.books.base_uri');
-        $this->baseUri = config('services.books.secret');
+        $this->secret = config('services.books.secret');
     }
 
     public function obtainBooks()
