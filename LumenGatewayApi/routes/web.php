@@ -40,6 +40,16 @@ $router->group(['middleware' => 'client.credentials'], function () use ($router)
     $router->put('/authors/{author}', 'AuthorController@update');
     $router->patch('/authors/{author}', 'AuthorController@update');
     $router->delete('/authors/{author}', 'AuthorController@destroy');
+
+    /**
+     * User routers
+     */
+    $router->get('/users', 'UserController@index');
+    $router->post('/users', 'UserController@store');
+    $router->get('/users/{user}', 'UserController@show');
+    $router->put('/users/{user}', 'UserController@update');
+    $router->patch('/users/{user}', 'UserController@update');
+    $router->delete('/users/{user}', 'UserController@destroy');
 });
 
 
