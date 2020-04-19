@@ -26,3 +26,16 @@ services:
       - APACHE_RUN_GROUP=#1000
     volumes:
       - ./LumenAuthorApi:/var/www/html
+  udemy-lumen-book:
+    build:
+      context: '.'
+      args:
+        uid: 1000
+    container_name: udemy-lumen-book
+    ports:
+      - 8001:80
+    environment:
+      - APACHE_RUN_USER=#1000
+      - APACHE_RUN_GROUP=#1000
+    volumes:
+      - ./LumenBooksApi:/var/www/html
