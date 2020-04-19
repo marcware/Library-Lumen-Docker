@@ -14,9 +14,15 @@ class AuthorService
      */
     public $baseUri;
 
+    /**
+     * @var string
+     */
+    public $secret;
+
     public function __construct()
     {
         $this->baseUri = config('services.authors.base_uri');
+        $this->baseUri = config('services.authors.secret');
     }
 
     public function obtainAuthors()
