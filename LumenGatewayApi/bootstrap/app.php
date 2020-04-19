@@ -1,9 +1,12 @@
 <?php
 
 
+use Dusterio\LumenPassport\Lumen7Application;
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new \Dusterio\LumenPassport\Lumen7Application(
+$app = new Lumen7Application(
     dirname(__DIR__)
 );
 
@@ -29,7 +32,6 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-
 $app->withEloquent();
 
 /**
@@ -71,12 +73,13 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+     App\Http\Middleware\AuthenticateAcces::class
+ ]);
+
 
 $app->routeMiddleware([
-    'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+    'client.credentials' => CheckClientCredentials::class,
 ]);
 
 /*
@@ -90,9 +93,9 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 //$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 
