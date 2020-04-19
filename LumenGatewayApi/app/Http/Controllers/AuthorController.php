@@ -48,7 +48,9 @@ class AuthorController extends Controller
 
     public function show($author)
     {
+        $author = $this->authorService->obtainAuthor($author);
 
+        return $this->succesResponse($author);
 
     }
 
