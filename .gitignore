@@ -1,3 +1,6 @@
 /run/
 /LumenAuthorApi/vendor/
 /LumenAuthorApi/database/database.sqlite
+
+/LumenBooksApi/vendor/
+/LumenGatewayApi/vendor/
