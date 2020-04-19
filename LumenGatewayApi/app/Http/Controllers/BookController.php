@@ -2,120 +2,89 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Book;
-use App\Services\bookService;
+use App\Services\BookService;
 use App\Traits\ApiResponser;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\ValidationException;
+use Laravel\Lumen\Http\ResponseFactory;
 
 class BookController extends Controller
 {
     use ApiResponser;
 
     /**
-     * @var bookService
+     * @var BookService
      */
     public $bookService;
 
     /**
-     * @param bookService $bookService
+     * @param BookService $bookService
      */
-    public function __construct(bookService $bookService)
+    public function __construct(BookService $bookService)
     {
         $this->bookService = $bookService;
     }
 
     /**
-     * Return authors list
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
     public function index()
     {
-        $books = Book::all();
+        $books = $this->bookService->obtainBooks();
 
         return $this->succesResponse($books);
     }
 
     /**
-     * Return authors created
      * @param Request $request
-     * @return JsonResponse
-     * @throws ValidationException
+     * @return Response|ResponseFactory
      */
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'price' => 'required|min:1',
-            'author_id' => 'required|min:1',
-        ];
 
-        $this->validate($request, $rules);
+        $books = $this->bookService->createBook($request->all());
 
-        $book = Book::create($request->all());
-
-        return $this->succesResponse($book, Response::HTTP_CREATED);
+        return $this->succesResponse($books,Response::HTTP_CREATED);
 
     }
 
+
     /**
-     * Return an author
      * @param Book $book
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
     public function show($book)
     {
-        $book = Book::findOrFail($book);
+        $book = $this->bookService->obtainBook($book);
 
         return $this->succesResponse($book);
 
     }
 
+
     /**
-     * Return an author
      * @param Request $request
      * @param Book $book
-     * @return JsonResponse
-     * @throws ValidationException
+     * @return Response|ResponseFactory
      */
     public function update(Request $request, $book)
     {
-        $rules = [
-            'title' => 'max:255',
-            'description' => 'max:255',
-            'price' => 'min:1',
-            'author_id' => 'min:1',
-        ];
-
-        $this->validate($request, $rules);
-
-        $book = Book::findOrFail($book);
-
-        $book->fill($request->all());
-
-        if($book->isClean()){
-            return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $book->save();
+        $book = $this->bookService->editBook($request->all(),$book);
 
         return $this->succesResponse($book);
 
     }
 
+
     /**
-     * Return an author
      * @param Book $book
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
     public function destroy($book)
     {
-        $book = Book::findOrFail($book);
-
-        $book->delete();
+        $book = $this->bookService->deleteBook($book);
 
         return $this->succesResponse($book);
 
