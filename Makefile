@@ -51,9 +51,27 @@ gateway-stop:
 chown:
 	sudo chown marcware:marcware -R LumenAuthorApi LumenBooksApi LumenGatewayApi
 
+ip-gateway:
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' udemy-lumen-gateway
+ip-book:
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' udemy-lumen-book
+ip-author:
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' udemy-lumen-author
+
 #ALL
 all-up:
 	make book-up
 	make author-up
 	make gateway-up
+	docker ps
+
+all-stop:
+	make book-stop
+	make author-stop
+	make gateway-stop
+	docker ps
+
+all-restart:
+	make all-stop
+	make all-up
 	docker ps
