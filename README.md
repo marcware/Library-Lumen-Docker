@@ -36,3 +36,9 @@ php artisan migrate:fresh --seed
 
 ## Router
 > /routes/web.php
+
+
+# COMPOSER
+
+> composer clearcache
+> composer dump-autoload

@@ -13,6 +13,8 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use GuzzleHttp\Exception\ClientException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -83,7 +85,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException) {
             $message = $exception->validator->errors()->getMessages();
 
-            return $this->errorResponse($message, Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->errorResponse((string)$message, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if($exception instanceof ClientException){
+            $message = $exception->getResponse()->getBody();
+            $code = $exception->getCode();
+            return $this->errorMessage($message,$code);
         }
 
         if (env('APP_DEBUG', false)) {
