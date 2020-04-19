@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
 use App\Services\AuthorService;
 use App\Traits\ApiResponser;
-
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Http\ResponseFactory;
 
 class AuthorController extends Controller
@@ -34,8 +30,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-
-       $authors = $this->authorService->obtainAuthors();
+        $authors = $this->authorService->obtainAuthors();
 
         return $this->succesResponse($authors);
     }
@@ -44,6 +39,9 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
 
+        $authors = $this->authorService->createAuthor($request->all());
+
+        return $this->succesResponse($authors,Response::HTTP_CREATED);
 
     }
 

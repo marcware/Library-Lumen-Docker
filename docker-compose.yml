@@ -12,7 +12,7 @@ services:
       - APACHE_RUN_USER=#1000
       - APACHE_RUN_GROUP=#1000
     volumes:
-      - ./LumenAuthorApi:/var/www/html
+      - ./LumenGatewayApi:/var/www/html
   udemy-lumen-author:
     build:
       context: '.'
