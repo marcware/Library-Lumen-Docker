@@ -57,14 +57,19 @@ class AuthorController extends Controller
 
     public function update(Request $request, $author)
     {
+        $author = $this->authorService->editAuthor($request->all(),$author);
 
+        return $this->succesResponse($author);
 
     }
 
 
     public function destroy($author)
-    {
 
+    {
+        $author = $this->authorService->deleteAuthor($author);
+
+        return $this->succesResponse($author);
 
     }
 
