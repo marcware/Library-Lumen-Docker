@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "ffea8b73-dfed-4da1-85fc-977977d4cfaf",
+		"name": "Author-Udemy-Lumen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Author-Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author-create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Marcos",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "españa",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author-search One",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/authors/34",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Verona Lumen",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/authors/34",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/authors/50",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors",
+						"50"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

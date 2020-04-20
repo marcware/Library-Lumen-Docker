@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "77b1e1d2-be40-4fc1-a3bb-ebb01ca0ce5f",
+		"name": "Books-Udemy-Lumen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Books all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8001/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Marcos",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "maleasdfasfd asdfasdf asdf asdf asdf asdf ",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "author_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8001/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books Search One",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8001/books/151",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"books",
+						"151"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Verona Lumen",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8001/books/151",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"books",
+						"151"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8001/books/152",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"books",
+						"152"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d8ab853d-3458-48b4-b07d-c1dbfb366a88",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3ed40336-aa3a-4dbd-866b-5952381444e7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
