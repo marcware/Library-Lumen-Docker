@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Author;
 use App\Traits\ApiResponser;
+use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -48,8 +49,10 @@ class UserController extends Controller
         ];
 
         $this->validate($request, $rules);
+        $field = $request->all();
+        $field['password'] = Hash::make($request->password);
 
-        $author = $User::create($request->all());
+        $user = $User::create($field);
 
         return $this->succesResponse($user, Response::HTTP_CREATED);
 
@@ -71,7 +74,7 @@ class UserController extends Controller
     /**
      * Return an author
      * @param Request $request
-     * @param $User $user
+     * @param $user
      * @return JsonResponse
      * @throws ValidationException
      */
@@ -79,7 +82,7 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'max:255',
-            'email' => 'max:255|email|unique:users,email',
+            'email' => 'max:255|email|unique:users,email,'.$user,
             'password' => 'max:8|confirmed'
         ];
 
@@ -89,7 +92,11 @@ class UserController extends Controller
 
         $user->fill($request->all());
 
-        if($user->isClean()){
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($user->isClean()) {
             return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
