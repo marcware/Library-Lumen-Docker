@@ -31,7 +31,7 @@ class AuthorController extends Controller
     {
         $authors = Author::All();
 
-        return $this->succesResponse($authors);
+        return $this->successResponse($authors);
     }
 
     /**
@@ -51,7 +51,7 @@ class AuthorController extends Controller
 
         $author = Author::create($request->all());
 
-        return $this->succesResponse($author, Response::HTTP_CREATED);
+        return $this->successResponse($author, Response::HTTP_CREATED);
 
     }
 
@@ -64,7 +64,7 @@ class AuthorController extends Controller
     {
         $author = Author::findOrFail($author);
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 
@@ -95,7 +95,7 @@ class AuthorController extends Controller
 
         $author->save();
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 
@@ -110,7 +110,7 @@ class AuthorController extends Controller
 
         $author->delete();
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 

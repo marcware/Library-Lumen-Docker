@@ -31,7 +31,7 @@ class BookController extends Controller
     {
         $books = Book::all();
 
-        return $this->succesResponse($books);
+        return $this->successResponse($books);
     }
 
     /**
@@ -53,7 +53,7 @@ class BookController extends Controller
 
         $book = Book::create($request->all());
 
-        return $this->succesResponse($book, Response::HTTP_CREATED);
+        return $this->successResponse($book, Response::HTTP_CREATED);
 
     }
 
@@ -66,7 +66,7 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($book);
 
-        return $this->succesResponse($book);
+        return $this->successResponse($book);
 
     }
 
@@ -98,7 +98,7 @@ class BookController extends Controller
 
         $book->save();
 
-        return $this->succesResponse($book);
+        return $this->successResponse($book);
 
     }
 
@@ -113,7 +113,7 @@ class BookController extends Controller
 
         $book->delete();
 
-        return $this->succesResponse($book);
+        return $this->successResponse($book);
 
     }
 

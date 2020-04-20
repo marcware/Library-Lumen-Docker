@@ -32,7 +32,7 @@ class AuthorController extends Controller
     {
         $authors = $this->authorService->obtainAuthors();
 
-        return $this->succesResponse($authors);
+        return $this->successResponse($authors);
     }
 
 
@@ -41,7 +41,7 @@ class AuthorController extends Controller
 
         $authors = $this->authorService->createAuthor($request->all());
 
-        return $this->succesResponse($authors,Response::HTTP_CREATED);
+        return $this->successResponse($authors,Response::HTTP_CREATED);
 
     }
 
@@ -50,7 +50,7 @@ class AuthorController extends Controller
     {
         $author = $this->authorService->obtainAuthor($author);
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 
@@ -59,7 +59,7 @@ class AuthorController extends Controller
     {
         $author = $this->authorService->editAuthor($request->all(),$author);
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 
@@ -69,7 +69,7 @@ class AuthorController extends Controller
     {
         $author = $this->authorService->deleteAuthor($author);
 
-        return $this->succesResponse($author);
+        return $this->successResponse($author);
 
     }
 

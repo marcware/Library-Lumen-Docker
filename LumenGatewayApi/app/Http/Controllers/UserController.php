@@ -30,9 +30,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $User::All();
+        $users = User::All();
 
-        return $this->succesResponse($users);
+        return $this->validResponse($users);
     }
 
     /**
@@ -49,12 +49,13 @@ class UserController extends Controller
         ];
 
         $this->validate($request, $rules);
+
         $field = $request->all();
         $field['password'] = Hash::make($request->password);
 
-        $user = $User::create($field);
+        $user = User::create($field);
 
-        return $this->succesResponse($user, Response::HTTP_CREATED);
+        return $this->successResponse($user, Response::HTTP_CREATED);
 
     }
 
@@ -67,7 +68,7 @@ class UserController extends Controller
     {
         $user = $User::findOrFail($user);
 
-        return $this->succesResponse($user);
+        return $this->successResponse($user);
 
     }
 
@@ -88,7 +89,7 @@ class UserController extends Controller
 
         $this->validate($request, $rules);
 
-        $user = $User::findOrFail($user);
+        $user = User::findOrFail($user);
 
         $user->fill($request->all());
 
@@ -102,7 +103,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return $this->succesResponse($user);
+        return $this->successResponse($user);
 
     }
 
@@ -113,11 +114,11 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        $user = $User::findOrFail($user);
+        $user = User::findOrFail($user);
 
         $user->delete();
 
-        return $this->succesResponse($user);
+        return $this->successResponse($user);
 
     }
 

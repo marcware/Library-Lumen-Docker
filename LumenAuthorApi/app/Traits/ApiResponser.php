@@ -14,7 +14,7 @@ trait ApiResponser
      * @param int $code
      * @return JsonResponse
      */
-    public function succesResponse($data, $code = Response::HTTP_OK)
+    public function successResponse($data, $code = Response::HTTP_OK)
     {
         return \response()->json(['data' => $data], $code);
     }

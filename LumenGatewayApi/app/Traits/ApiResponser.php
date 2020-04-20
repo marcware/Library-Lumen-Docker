@@ -15,10 +15,21 @@ trait ApiResponser
      * @param int $code
      * @return Response|ResponseFactory
      */
-    public function succesResponse($data, $code = Response::HTTP_OK)
+    public function successResponse($data, $code = Response::HTTP_OK)
     {
         return \response($data, $code)->header('Content-Type', 'application/json');
     }
+
+    /**
+     * @param string|array $data
+     * @param int $code
+     * @return JsonResponse
+     */
+    public function validResponse($data, $code = Response::HTTP_OK)
+    {
+        return \response()->json(['data' => $data], $code);
+    }
+
 
     /**
      * @param string $message
