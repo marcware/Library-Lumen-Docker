@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Traits\ApiResponser;
 use App\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -25,66 +23,59 @@ class UserController extends Controller
     }
 
     /**
-     * Return authors list
-     * @return JsonResponse
+     * Return the list of users
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $users = User::All();
+        $users = User::all();
 
         return $this->validResponse($users);
     }
 
     /**
-     * Return authors created
-     * @param Request $request
-     * @return JsonResponse
+     * Create one new user
+     * @return Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $rules = [
             'name' => 'required|max:255',
-            'email' => 'required|max:255|email|unique:users,email',
-            'password' => 'required|max:8|confirmed'
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
         ];
 
         $this->validate($request, $rules);
 
-        $field = $request->all();
-        $field['password'] = Hash::make($request->password);
+        $fields = $request->all();
+        $fields['password'] = Hash::make($request->password);
 
-        $user = User::create($field);
+        $user = User::create($fields);
 
-        return $this->successResponse($user, Response::HTTP_CREATED);
-
+        return $this->validResponse($user, Response::HTTP_CREATED);
     }
 
     /**
-     * Return an author
-     * @param $User $user
-     * @return JsonResponse
+     * Obtains and show one user
+     * @return Illuminate\Http\Response
      */
     public function show($user)
     {
-        $user = $User::findOrFail($user);
+        $user = User::findOrFail($user);
 
-        return $this->successResponse($user);
-
+        return $this->validResponse($user);
     }
 
     /**
-     * Return an author
-     * @param Request $request
-     * @param $user
-     * @return JsonResponse
-     * @throws ValidationException
+     * Update an existing user
+     * @return Illuminate\Http\Response
      */
     public function update(Request $request, $user)
     {
         $rules = [
             'name' => 'max:255',
-            'email' => 'max:255|email|unique:users,email,'.$user,
-            'password' => 'max:8|confirmed'
+            'email' => 'email|unique:users,email,' . $user,
+            'password' => 'min:8|confirmed',
         ];
 
         $this->validate($request, $rules);
@@ -103,14 +94,12 @@ class UserController extends Controller
 
         $user->save();
 
-        return $this->successResponse($user);
-
+        return $this->validResponse($user);
     }
 
     /**
-     * Return an author
-     * @param $User $user
-     * @return JsonResponse
+     * Remove an existing user
+     * @return Illuminate\Http\Response
      */
     public function destroy($user)
     {
@@ -118,8 +107,15 @@ class UserController extends Controller
 
         $user->delete();
 
-        return $this->successResponse($user);
-
+        return $this->validResponse($user);
     }
 
+    /**
+     * Identify existing user
+     * @return Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        return $this->validResponse($request->user());
+    }
 }

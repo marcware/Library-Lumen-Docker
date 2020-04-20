@@ -58,10 +58,11 @@ php artisan migrate:fresh --seed
 Encryption keys generated successfully.
 Personal access client created successfully.
 Client ID: 1
-Client secret: m6k3wVIDyDvM2SW4sDIm0a5J51wq5MHw80IVhsc3
+Client secret: mNUu6TyjXWDytb25jZbUDeD3fXAHSYBhUr7o7UoO
 Password grant client created successfully.
 Client ID: 2
-Client secret: OzpeLGZB5F7RCnZwtlEMG2x5RispkJNnkcrUyjUC
+Client secret: 43cdyaQkJlNvgTuzS4V3MHQg9GMcl5dptXINooFZ
+
 
 ````bash
     php artisan passport:client

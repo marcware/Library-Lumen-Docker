@@ -79,6 +79,7 @@ $app->singleton(
 
 
 $app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
     'client.credentials' => CheckClientCredentials::class,
 ]);
 

@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Book;
 use Dusterio\LumenPassport\LumenPassport;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
