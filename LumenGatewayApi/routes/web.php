@@ -45,8 +45,7 @@ $router->group(['middleware' => 'client.credentials'], function () use ($router)
 
 /**
  * Routes protected by user credentials
-
+ */
 $router->group(['middleware' => 'auth:api'], function () use ($router) {
     $router->get('/users/me', 'UserController@me');
 });
- */
