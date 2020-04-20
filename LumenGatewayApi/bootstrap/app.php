@@ -1,17 +1,9 @@
 <?php
 
-
-use Dusterio\LumenPassport\Lumen7Application;
-use Laravel\Passport\Http\Middleware\CheckClientCredentials;
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new Lumen7Application(
-    dirname(__DIR__)
-);
-
 try {
-    (new Dotenv\Dotenv(dirname(__DIR__)))->load();
+    (new Dotenv\Dotenv(__DIR__ . '/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     //
 }
@@ -28,10 +20,11 @@ try {
 */
 
 $app = new Laravel\Lumen\Application(
-    dirname(__DIR__)
+    realpath(__DIR__ . '/../')
 );
 
 $app->withFacades();
+
 $app->withEloquent();
 
 /**
@@ -39,7 +32,6 @@ $app->withEloquent();
  */
 $app->configure('services');
 $app->configure('auth');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -74,13 +66,12 @@ $app->singleton(
 */
 
 // $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
+//    App\Http\Middleware\ExampleMiddleware::class
 // ]);
-
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'client.credentials' => CheckClientCredentials::class,
+    'client.credentials' => Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 ]);
 
 /*
@@ -95,11 +86,10 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\EventServiceProvider::class);
-//$app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
-
 
 /*
 |--------------------------------------------------------------------------

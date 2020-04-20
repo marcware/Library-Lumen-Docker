@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Book;
-use App\Services\AuthorService;
-use App\Services\BookService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use App\Services\BookService;
 use Illuminate\Http\Response;
-use Laravel\Lumen\Http\ResponseFactory;
+use App\Services\AuthorService;
 
 class BookController extends Controller
 {
     use ApiResponser;
 
     /**
+     * The service to consume the book service
      * @var BookService
      */
     public $bookService;
 
     /**
+     * The service to consume the author service
      * @var AuthorService
      */
     public $authorService;
 
     /**
-     * @param BookService $bookService
-     * @param AuthorService $authorService
+     * Create a new controller instance.
+     *
+     * @return void
      */
     public function __construct(BookService $bookService, AuthorService $authorService)
     {
@@ -36,68 +36,50 @@ class BookController extends Controller
     }
 
     /**
-     * @return Response|ResponseFactory
+     * Retrieve and show all the Books
+     * @return Illuminate\Http\Response
      */
     public function index()
     {
-        $books = $this->bookService->obtainBooks();
-
-        return $this->successResponse($books);
+        return $this->successResponse($this->bookService->obtainBooks());
     }
 
     /**
-     * @param Request $request
-     * @return Response|ResponseFactory
+     * Creates an instance of Book
+     * @return Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $this->authorService->obtainAuthor($request->author_id);
 
-       $author = $this->authorService->obtainAuthor($request->author_id);
-
-        $books = $this->bookService->createBook($request->all());
-
-        return $this->successResponse($books,Response::HTTP_CREATED);
-
+        return $this->successResponse($this->bookService->createBook($request->all()), Response::HTTP_CREATED);
     }
 
-
     /**
-     * @param Book $book
-     * @return Response|ResponseFactory
+     * Obtain and show an instance of Book
+     * @return Illuminate\Http\Response
      */
     public function show($book)
     {
-        $book = $this->bookService->obtainBook($book);
-
-        return $this->successResponse($book);
-
+        return $this->successResponse($this->bookService->obtainBook($book));
     }
 
-
     /**
-     * @param Request $request
-     * @param Book $book
-     * @return Response|ResponseFactory
+     * Updated an instance of Book
+     * @return Illuminate\Http\Response
      */
     public function update(Request $request, $book)
     {
-        $book = $this->bookService->editBook($request->all(),$book);
-
-        return $this->successResponse($book);
-
+        return $this->successResponse($this->bookService->editBook($request->all(), $book));
     }
 
-
     /**
-     * @param Book $book
-     * @return Response|ResponseFactory
+     * Removes an instance of Book
+     * @return Illuminate\Http\Response
      */
     public function destroy($book)
     {
-        $book = $this->bookService->deleteBook($book);
-
-        return $this->successResponse($book);
-
+        return $this->successResponse($this->bookService->deleteBook($book));
     }
 
 }

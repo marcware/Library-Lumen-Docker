@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AuthorService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Laravel\Lumen\Http\ResponseFactory;
+use App\Services\AuthorService;
 
 class AuthorController extends Controller
 {
     use ApiResponser;
 
     /**
+     * The service to consume the author service
      * @var AuthorService
      */
     public $authorService;
 
     /**
-     * @param AuthorService $authorService
+     * Create a new controller instance.
+     *
+     * @return void
      */
     public function __construct(AuthorService $authorService)
     {
@@ -26,51 +28,48 @@ class AuthorController extends Controller
     }
 
     /**
-     * @return Response|ResponseFactory
+     * Retrieve and show all the authors
+     * @return Illuminate\Http\Response
      */
     public function index()
     {
-        $authors = $this->authorService->obtainAuthors();
-
-        return $this->successResponse($authors);
+        return $this->successResponse($this->authorService->obtainAuthors());
     }
 
-
+    /**
+     * Creates an instance of author
+     * @return Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-
-        $authors = $this->authorService->createAuthor($request->all());
-
-        return $this->successResponse($authors,Response::HTTP_CREATED);
-
+        return $this->successResponse($this->authorService->createAuthor($request->all()), Response::HTTP_CREATED);
     }
 
-
+    /**
+     * Obtain and show an instance of author
+     * @return Illuminate\Http\Response
+     */
     public function show($author)
     {
-        $author = $this->authorService->obtainAuthor($author);
-
-        return $this->successResponse($author);
-
+        return $this->successResponse($this->authorService->obtainAuthor($author));
     }
 
-
+    /**
+     * Updated an instance of author
+     * @return Illuminate\Http\Response
+     */
     public function update(Request $request, $author)
     {
-        $author = $this->authorService->editAuthor($request->all(),$author);
-
-        return $this->successResponse($author);
-
+        return $this->successResponse($this->authorService->editAuthor($request->all(), $author));
     }
 
-
+    /**
+     * Removes an instance of author
+     * @return Illuminate\Http\Response
+     */
     public function destroy($author)
-
     {
-        $author = $this->authorService->deleteAuthor($author);
-
-        return $this->successResponse($author);
-
+        return $this->successResponse($this->authorService->deleteAuthor($author));
     }
 
 }

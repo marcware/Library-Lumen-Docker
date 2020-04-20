@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
@@ -12,50 +11,23 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-
-
     use Authenticatable, Authorizable, HasApiTokens;
 
-    protected $fillable=[
-        'name', 'email','password'
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password',
     ];
 
-    protected $hidden=[
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
         'password',
     ];
-
-    public function getAuthIdentifierName()
-    {
-        // TODO: Implement getAuthIdentifierName() method.
-    }
-
-    public function getAuthIdentifier()
-    {
-        // TODO: Implement getAuthIdentifier() method.
-    }
-
-    public function getAuthPassword()
-    {
-        // TODO: Implement getAuthPassword() method.
-    }
-
-    public function getRememberToken()
-    {
-        // TODO: Implement getRememberToken() method.
-    }
-
-    public function setRememberToken($value)
-    {
-        // TODO: Implement setRememberToken() method.
-    }
-
-    public function getRememberTokenName()
-    {
-        // TODO: Implement getRememberTokenName() method.
-    }
-
-    public function can($ability, $arguments = [])
-    {
-        // TODO: Implement can() method.
-    }
 }

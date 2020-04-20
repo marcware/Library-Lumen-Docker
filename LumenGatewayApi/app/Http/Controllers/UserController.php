@@ -23,8 +23,8 @@ class UserController extends Controller
     }
 
     /**
-     * Return the list of users
-     * @return \Illuminate\Http\JsonResponse
+     * Return users list
+     * @return Illuminate\Http\Response
      */
     public function index()
     {
@@ -34,7 +34,7 @@ class UserController extends Controller
     }
 
     /**
-     * Create one new user
+     * Create an instance of User
      * @return Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,7 +56,7 @@ class UserController extends Controller
     }
 
     /**
-     * Obtains and show one user
+     * Return an specific user
      * @return Illuminate\Http\Response
      */
     public function show($user)
@@ -67,7 +67,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update an existing user
+     * Update the information of an existing user
      * @return Illuminate\Http\Response
      */
     public function update(Request $request, $user)
@@ -98,7 +98,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove an existing user
+     * Removes an existing user
      * @return Illuminate\Http\Response
      */
     public function destroy($user)
@@ -111,7 +111,7 @@ class UserController extends Controller
     }
 
     /**
-     * Identify existing user
+     * Identifies the curren user
      * @return Illuminate\Http\Response
      */
     public function me(Request $request)

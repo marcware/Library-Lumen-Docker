@@ -1,7 +1,5 @@
 <?php
 
-use Laravel\Lumen\Routing\Router;
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,26 +11,9 @@ use Laravel\Lumen\Routing\Router;
 |
 */
 
-//$router->get('/', function () use ($router) {return $router->app->version();});
-
-
-/**
- * @var Router $router
- */
-
 $router->group(['middleware' => 'client.credentials'], function () use ($router) {
     /**
-     * Books routers
-     */
-    $router->get('/books', 'BookController@index');
-    $router->post('/books', 'BookController@store');
-    $router->get('/books/{book}', 'BookController@show');
-    $router->put('/books/{book}', 'BookController@update');
-    $router->patch('/books/{book}', 'BookController@update');
-    $router->delete('/books/{book}', 'BookController@destroy');
-
-    /**
-     * Authors routers
+     * Authors routes
      */
     $router->get('/authors', 'AuthorController@index');
     $router->post('/authors', 'AuthorController@store');
@@ -42,7 +23,17 @@ $router->group(['middleware' => 'client.credentials'], function () use ($router)
     $router->delete('/authors/{author}', 'AuthorController@destroy');
 
     /**
-     * User routers
+     * Books routes
+     */
+    $router->get('/books', 'BookController@index');
+    $router->post('/books', 'BookController@store');
+    $router->get('/books/{book}', 'BookController@show');
+    $router->put('/books/{book}', 'BookController@update');
+    $router->patch('/books/{book}', 'BookController@update');
+    $router->delete('/books/{book}', 'BookController@destroy');
+
+    /**
+     * Users routes
      */
     $router->get('/users', 'UserController@index');
     $router->post('/users', 'UserController@store');
@@ -52,4 +43,9 @@ $router->group(['middleware' => 'client.credentials'], function () use ($router)
     $router->delete('/users/{user}', 'UserController@destroy');
 });
 
-
+/**
+ * Routes protected by user credentials
+ */
+$router->group(['middleware' => 'auth:api'], function () use ($router) {
+    $router->get('/users/me', 'UserController@me');
+});

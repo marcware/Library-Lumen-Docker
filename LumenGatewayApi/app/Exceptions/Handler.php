@@ -2,23 +2,19 @@
 
 namespace App\Exceptions;
 
-use App\Traits\ApiResponser;
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use GuzzleHttp\Exception\ClientException;
-
 
 class Handler extends ExceptionHandler
 {
-
     use ApiResponser;
 
     /**
@@ -38,7 +34,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param Exception $exception
+     * @param  \Exception  $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -49,9 +45,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param Request $request
-     * @param Exception $exception
-     * @return Response | JsonResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
@@ -62,41 +58,38 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($message, $code);
         }
 
-
         if ($exception instanceof ModelNotFoundException) {
-            $model = class_basename($exception->getModel());
+            $model = strtolower(class_basename($exception->getModel()));
 
-            $message = "Does not exist any unstance of {$model} with the gicen id";
-            return $this->errorResponse($message, Response::HTTP_NOT_FOUND);
-
+            return $this->errorResponse("Does not exist any instance of {$model} with the given id", Response::HTTP_NOT_FOUND);
         }
 
         if ($exception instanceof AuthorizationException) {
-            $message = $exception->getMessage();
-            return $this->errorResponse($message, Response::HTTP_FORBIDDEN);
+            return $this->errorResponse($exception->getMessage(), Response::HTTP_FORBIDDEN);
         }
 
         if ($exception instanceof AuthenticationException) {
-            $message = $exception->getMessage();
-            return $this->errorResponse($message, Response::HTTP_UNAUTHORIZED);
+            return $this->errorResponse($exception->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
 
         if ($exception instanceof ValidationException) {
-            $message = $exception->validator->errors()->getMessages();
-            return $this->errorResponse((string)$message, Response::HTTP_UNPROCESSABLE_ENTITY);
+            $errors = $exception->validator->errors()->getMessages();
+
+            return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if($exception instanceof ClientException){
+        if ($exception instanceof ClientException) {
             $message = $exception->getResponse()->getBody();
             $code = $exception->getCode();
-            return $this->errorMessage($message,$code);
+
+            return $this->errorMessage($message, $code);
         }
 
         if (env('APP_DEBUG', false)) {
             return parent::render($request, $exception);
         }
 
-        return $this->errorResponse('Enexpected error.', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return $this->errorResponse('Unexpected error. Try later', Response::HTTP_INTERNAL_SERVER_ERROR);
 
     }
 }

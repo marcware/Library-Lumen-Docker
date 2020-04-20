@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Dusterio\LumenPassport\LumenPassport;
 use Illuminate\Support\ServiceProvider;
+use Dusterio\LumenPassport\LumenPassport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -31,11 +31,10 @@ class AuthServiceProvider extends ServiceProvider
 
         /*$this->app['auth']->viaRequest('api', function ($request) {
             if ($request->input('api_token')) {
-                return Book::where('api_token', $request->input('api_token'))->first();
+                return User::where('api_token', $request->input('api_token'))->first();
             }
         });*/
 
         LumenPassport::routes($this->app->router);
-
     }
 }
