@@ -1,9 +1,9 @@
 /run/
 /LumenAuthorApi/vendor/
-/LumenAuthorApi/database/database.sqlite
-
 /LumenBooksApi/vendor/
 /LumenGatewayApi/vendor/
+
 /LumenGatewayApi/storage/oauth-private.key
 /LumenGatewayApi/storage/oauth-public.key
+
 *.sqlite
